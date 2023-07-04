@@ -1,11 +1,11 @@
 # Customizable variables
-ROMNAME=
+ROMNAME=TheParasiteProject
 BUILDBASE=$HOME
 ROMBASE=${BUILDBASE}/android/$ROMNAME
 
 ## Sync
 MANIFEST_URL=https://github.com/$ROMNAME/manifest
-BRANCH=
+BRANCH=14.0
 FORCEINIT=true
 SHALLOWSYNC=true
 
@@ -17,14 +17,14 @@ CCACHESIZE=50G
 CUSTOM_GO_CACHE_DIR=true
 GOCACHEDIR=${BUILDBASE}/android/.cache/go-build
 TCACHE=true
-GTLTO=
+#GTLTO=true ## Zip file error ##
 
 ## Build
-DEVICE=
-BUILDTYPE=
-BUILD_TARGET=""
-OUT_FILE=""
-LUNCHCOMMAND=
+DEVICE=sweet
+BUILDTYPE=user
+BUILD_TARGET="bacon"
+OUT_FILE="$ROMNAME*$DEVICE*.zip"
+LUNCHCOMMAND=aosp_$DEVICE-$BUILDTYPE
 
 ## Output directories
 BUILD_OUT=$ROMBASE/out

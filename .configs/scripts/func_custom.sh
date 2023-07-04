@@ -11,5 +11,5 @@ repo_sync_custom () {
 }
 
 update_repo_manifest () {
-	return
+	repo_init
 }
