@@ -1,0 +1,8 @@
+*.zip
+*.img
+*.log
+!.configs/additional-patches/.placeholder
+!.configs/additional-manifests/.placeholder
+.configs/additional-patches/*.patch
+.configs/additional-manifests/*.xml
+.configs/device-manifests
