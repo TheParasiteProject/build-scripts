@@ -318,7 +318,7 @@ build_and_copy () {
 	local buildtarget="$1"
 	local buildout="$2"
 	local outdir="$3"
-	m -j "$buildtarget"
+	m -j${nproc} "$buildtarget"
 	if [ $? != 0 ];
 	then
 		outfile=$(ls -rt $ROMBASE/out/error*.log | tail -1)
