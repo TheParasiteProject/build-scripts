@@ -318,7 +318,12 @@ build_and_copy () {
 	local buildtarget="$1"
 	local buildout="$2"
 	local outdir="$3"
-	m -j${nproc} "$buildtarget"
+	if [ "$BUILDDIST" = true ];
+	then
+		m -j${nproc} dist
+	else
+		m -j${nproc} "$buildtarget"
+	fi
 	if [ $? != 0 ];
 	then
 		outfile=$(ls -rt $ROMBASE/out/error*.log | tail -1)
@@ -328,11 +333,18 @@ build_and_copy () {
 		exit 1
 	elif [ ! -z "$buildout" ];
 	then
+		target_out_dir=
+		if [ "$BUILDDIST" = true ];
+		then
+			target_out_dir=$ROMBASE/out/dist
+		else
+			target_out_dir=$ROMBASE/out/target/product/$DEVICE
+		fi
 		for i in $(echo "$buildout" | tr ";" "\n");
 		do
-			if [ -f $(ls -rt $ROMBASE/out/target/product/$DEVICE/$i | tail -1) ];
+			if [ -f $(ls -rt $target_out_dir/$i | tail -1) ];
 			then
-				outfile=$(ls -rt $ROMBASE/out/target/product/$DEVICE/$i | tail -1)
+				outfile=$(ls -rt $target_out_dir/$i | tail -1)
 				mkdir -p $outdir
 				mv $outfile $outdir
 			fi
