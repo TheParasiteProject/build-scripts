@@ -6,3 +6,4 @@
 .configs/additional-patches/*.patch
 .configs/additional-manifests/*.xml
 .configs/device-manifests
+out/
