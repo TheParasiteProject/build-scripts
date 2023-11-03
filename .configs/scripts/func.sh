@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source $CWD/.configs/scripts/script-configs.txt
+
 get_arguments () {
 	for arg in "$@";
 	do
@@ -12,19 +14,6 @@ get_arguments () {
 				set -x
 			else
 				echo "Verbose mode set to $VERBOSE by options.txt"
-			fi
-	    fi
-	    if [ "$arg" == "--bootimage" ] || [ "$arg" == "-b" ];
-	    then
-	        if [ "$ARG_BOOTIMG_SUPPORTED" = true ];
-	        then
-		        if [ -z $BOOTIMG ];
-		        then
-					echo "Build bootimage only."
-					BOOTIMG=true
-				else
-					echo "Bootimage build mode set to $BOOTIMG by options.txt"
-				fi
 			fi
 	    fi
 		if [ "$arg" == "--ccache" ] || [ "$arg" == "-ec" ];
@@ -128,7 +117,7 @@ init_git_account () {
 update_apt () {
 	# prompt for root and install necessary packages
 	sudo apt update
-	sudo apt install aria2 wget '^liblz4-.*' '^liblzma.*' '^lzma.*' adb apt-utils autoconf automake axel bc binfmt-support bison build-essential ccache clang cmake curl expat fastboot flex g++ g++-multilib gawk gcc gcc-multilib git gnupg gperf htop imagemagick lib32ncurses-dev lib32ncurses5-dev lib32readline-dev lib32z1-dev libc6-dev libcap-dev libexpat1-dev libgmp-dev liblz4-tool libmpc-dev libmpfr-dev libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libswitch-perl libtinfo5 libtool libwxgtk3.2-dev libxml-simple-perl libxml2 libxml2-utils lzip lzop maven mtd-utils ncftp ncurses-dev patch patchelf pkg-config pngcrush pngquant python3-all-dev python-is-python3 python3 re2c rsync schedtool squashfs-tools subversion texinfo unzip w3m xsltproc zip zlib1g-dev software-properties-common gh lsb-base xmlstarlet python3-venv python3-full mtp-tools -y
+	sudo apt install aria2 wget '^liblz4-.*' '^liblzma.*' '^lzma.*' adb apt-utils autoconf automake axel bc binfmt-support bison build-essential ccache clang cmake curl expat fastboot flex g++ g++-multilib gawk gcc gcc-multilib git gnupg gperf htop imagemagick lib32ncurses-dev lib32ncurses5-dev lib32readline-dev lib32z1-dev libc6-dev libcap-dev libexpat1-dev libgmp-dev liblz4-tool libmpc-dev libmpfr-dev libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libswitch-perl libtinfo5 libtool libwxgtk3.2-dev libxml-simple-perl libxml2 libxml2-utils lzip lzop maven mtd-utils ncftp ncurses-dev patch patchelf pkg-config pngcrush pngquant python3-all-dev python-is-python3 python3 re2c rsync schedtool squashfs-tools subversion texinfo unzip w3m xsltproc zip zlib1g-dev software-properties-common gh lsb-base xmlstarlet python3-venv python3-full mtp-tools golang -y
 	sudo apt -y upgrade
 }
 
@@ -239,7 +228,7 @@ copy_additional_manifests () {
 }
 
 repo_init () {
-	repo init --depth=1 --no-repo-verify -u https://github.com/$ROMNAME/manifest -b $BRANCH -g default,-mips,-darwin,-notdefault
+	repo init --depth=1 --no-repo-verify -u "$MANIFEST_URL" -b $BRANCH -g default,-mips,-darwin,-notdefault
 }
 
 repo_sync () {
@@ -261,7 +250,7 @@ clean_all_cache () {
 }
 
 clean_error_logs () {
-	rm -Rf $ROMBASE/out/error*.log
+	rm -Rf $BUILD_OUT/error*.log
 }
 
 custom_go_cache_dir () {
@@ -279,8 +268,8 @@ set_ccache () {
 		export CCACHE_EXEC="/usr/bin/ccache"
 		export WITHOUT_CHECK_API=true
 		export CCACHE_DIR="$CCACHEDIR"
-		mkdir -p $CCACHE_DIR
-		ccache -M 50G
+		mkdir -p "$CCACHE_DIR"
+		ccache -M $CCACHESIZE
 	fi
 }
 
@@ -314,46 +303,35 @@ shutdown_system () {
 	fi
 }
 
-build_and_copy () {
-	local buildtarget="$1"
-	local buildout="$2"
-	local outdir="$3"
-	if [ "$BUILDDIST" = true ];
+copy_built_files() {
+	if [ ! -d "$OUTDIR" ];
 	then
-		m -j${nproc} dist
-	else
-		m -j${nproc} "$buildtarget"
+		mkdir -p "$OUTDIR"
+	fi
+	for i in $2;
+	do
+		if [ -f "$1"/$i ];
+		then
+			mv "$1"/$i "$OUTDIR"
+		fi
+	done
+}
+
+build_and_copy () {
+	lunch "$LUNCHCOMMAND"
+	if [ ! -z "$BUILD_TARGET" ];
+	then
+		m -j"$BUILD_PROC" "$BUILD_TARGET"
 	fi
 	if [ $? != 0 ];
 	then
-		outfile=$(ls -rt $ROMBASE/out/error*.log | tail -1)
-		mkdir -p $outdir
-		mv $outfile $outdir
+		copy_built_files "$BUILD_OUT" error.log
 		echo "Build failed!"
 		exit 1
-	elif [ ! -z "$buildout" ];
+	elif [ ! -z "$BUILD_OUT" ];
 	then
-		target_out_dir=
-		if [ "$BUILDDIST" = true ];
-		then
-			target_out_dir=$ROMBASE/out/dist
-		else
-			target_out_dir=$ROMBASE/out/target/product/$DEVICE
-		fi
-		for i in $(echo "$buildout" | tr ";" "\n");
-		do
-			if [ -f $(ls -rt $target_out_dir/$i | tail -1) ];
-			then
-				outfile=$(ls -rt $target_out_dir/$i | tail -1)
-				mkdir -p $outdir
-				mv $outfile $outdir
-			fi
-		done
+		copy_built_files "$BUILD_TARGET_OUT" "$OUT_FILE"
 	fi
-	buildtarget=
-	buildout=
-	outdir=
-	outfile=
 }
 
 apply_patch () {

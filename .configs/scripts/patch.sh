@@ -13,7 +13,7 @@ then
  	exit 1
 fi
 
-source $CWD/options.txt
+source $CWD/.configs/scripts/script-configs.txt
 
 source $FUNCS
 source $FUNCS_CUSTOM

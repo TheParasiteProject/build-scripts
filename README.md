@@ -24,8 +24,9 @@ These are not fancy scripts. Just for personal use :P
 
 ### Vars
 
-* ROMNAME: Name of this project. This var will use as folder name, main org name of sources.
-* BRANCH: Target branch to sync.
+* ROMNAME: Name of this project. This var will use as folder name, main org name of sources.<br>
+* MANIFEST_URL: Manifest URL to init/sync with `repo` command.<br>
+* BRANCH: Target branch to sync.<br>
 * BUILDBASE: Parent directory of rom sources storage. Default to `$HOME`.<br>
   Will synced under ```$BUILDBASE/android/$ROMNAME```
 * FORCEINIT: Enforce initialization when updating manifest fails.<br>
@@ -57,17 +58,34 @@ These are not fancy scripts. Just for personal use :P
 
 ### Vars
 
-* ROMNAME: Name of this project. This var will use as folder name, main org name of sources.
-* BUILDTYPE: Build type of rom to build. Default to `user`.<br>
-* DEVICE: Target device of rom to build. Default to `common`.<br>
-* LUNCHCOMMAND: Lunch command of rom to build. Default to `twrp_$DEVICE-$BUILDTYPE`.<br>
 * BUILDBASE: Parent directory of where rom sources is located. Default to `$HOME`.<br>
-  Should be same as `sync.sh`'s `$BUILDBASE`.
+  Should be same as `sync.sh`'s `$BUILDBASE`.<br>
+* BUILD_OUT: Output directory of build.<br>
+* BUILD_TARGET_OUT: Output directory of build target.<br>
+* OUTDIR: Output directory to copy built files.<br>
+* BUILD_PROC: Set multi process jobs number for build.<br>
+* CCACHE: Enable CCache<br>
+* CCACHEDIR: Dir to store CCache.<br>
+* CCACHESIZE: Size of CCache.<br>
+* CUSTOM_GO_CACHE_DIR: Enable custom Go Build Cache.<br>
+* GOCACHEDIR: Dir to store Go Build Cache.<br>
+* TCACHE: Enable ThinLTO Cache.<br>
+* GTLTO: Enable Global ThinLTO.<br>
+* ROMNAME: Name of this project. This var will use as folder name.<br>
+* DEVICE: Target device of rom to build.
+  `DEVICE=common`.<br>
+* BUILDTYPE: Build type of rom to build. 
+  e.g. `BUILDTYPE=user`.<br>
+* BUILD_TARGET: Target to build.<br>
+  e.g. `BUILD_TARGET="bootimage recoveryimage"`
+* OUT_FILE: Output file names after built.<br>
+  e.g. `OUT_FILE="boot.img recovery.img"`
+* LUNCHCOMMAND: Lunch command of rom to build.
+  e.g. `aosp_$DEVICE-$BUILDTYPE`.<br>
 
 ### Args
 
 * `--verbose` or `-v`: Verbose mode. Show all excuted commands while sync.
-* `--bootimage` or `-b`: Build bootimage only instead of entire rom.
 * `--ccache` or `-ec`: Enable CCache.
 * `--thinlto-cache` or `-tc`: Enable ThinLTO Cache.
 * `--clean` or `-c`: Clean mode. Build rom from scratch instead of dirty build.

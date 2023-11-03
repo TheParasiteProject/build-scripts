@@ -4,11 +4,11 @@ ARG_CCACHE_SUPPORTED=true
 ARG_TCACHE_SUPPORTED=true
 ARG_CLEAN_SUPPORTED=true
 ARG_ACLEAN_SUPPORTED=true
-ARG_BOOTIMG_SUPPORTED=true
 
 # get current working directory
 CWD=$(pwd)
 
+source $CWD/.configs/scripts/script-configs.txt
 source $CWD/options.txt
 
 # Create output directory to store rom zip, img
@@ -51,6 +51,6 @@ set_global_thinlto
 clean_build
 
 # check rom type and assign gapps type and rom type
-build_custom
+build_and_copy
 
 shutdown_system
