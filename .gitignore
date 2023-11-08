@@ -7,3 +7,4 @@
 .configs/additional-manifests/*.xml
 .configs/device-manifests
 out/
+options.txt
