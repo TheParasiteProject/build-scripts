@@ -31,6 +31,8 @@ These are not fancy scripts. Just for personal use :P
   Will synced under ```$BUILDBASE/android/$ROMNAME```
 * FORCEINIT: Enforce initialization when updating manifest fails.<br>
   Default to `true`.
+* SHALLOWSYNC: Shallow sync repos to save storage.<br>
+  Default to `true`.
 
 ### Args
 
