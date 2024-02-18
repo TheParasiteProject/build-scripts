@@ -228,11 +228,21 @@ copy_additional_manifests () {
 }
 
 repo_init () {
-	repo init --depth=1 --no-repo-verify -u "$MANIFEST_URL" -b $BRANCH -g default,-mips,-darwin,-notdefault
+	if [ "$SHALLOWSYNC" = true ];
+	then
+		repo init --depth=1 --no-repo-verify -u "$MANIFEST_URL" -b $BRANCH -g default,-mips,-darwin,-notdefault
+	else
+		repo init --no-repo-verify -u "$MANIFEST_URL" -b $BRANCH -g default,-mips,-darwin,-notdefault
+	fi
 }
 
 repo_sync () {
-	repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all)
+	if [ "$SHALLOWSYNC" = true ];
+	then
+		repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all)
+	else
+		repo sync -c --force-sync --optimized-fetch --prune -j$(nproc --all)
+	fi
 }
 
 repo_reset () {
