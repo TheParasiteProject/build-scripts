@@ -11,12 +11,12 @@ SHALLOWSYNC=true
 
 ## Build configs
 BUILD_PROC=${nproc}
-CCACHE=true
-CCACHEDIR=${BUILDBASE}/android/.cache/.ccache
-CCACHESIZE=50G
-CUSTOM_GO_CACHE_DIR=true
-GOCACHEDIR=${BUILDBASE}/android/.cache/go-build
-TCACHE=true
+#CCACHE=true
+#CCACHEDIR=${BUILDBASE}/android/.cache/.ccache
+#CCACHESIZE=50G
+#CUSTOM_GO_CACHE_DIR=true
+#GOCACHEDIR=${BUILDBASE}/android/.cache/go-build
+#TCACHE=true
 #GTLTO=true ## Zip file error ##
 
 ## Build
