@@ -337,7 +337,6 @@ build_and_copy () {
 	then
 		copy_built_files "$BUILD_OUT" error.log
 		echo "Build failed!"
-		exit 1
 	elif [ ! -z "$BUILD_OUT" ];
 	then
 		copy_built_files "$BUILD_TARGET_OUT" "$OUT_FILE"
