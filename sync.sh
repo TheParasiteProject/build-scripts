@@ -67,3 +67,5 @@ then
 	# Apply custom patches
 	bash -x $PATCHER $CWD
 fi
+
+shutdown_system
