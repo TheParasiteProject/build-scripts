@@ -92,6 +92,7 @@ These are not fancy scripts. Just for personal use :P
 * `--thinlto-cache` or `-tc`: Enable ThinLTO Cache.
 * `--clean` or `-c`: Clean mode. Build rom from scratch instead of dirty build.
 * `--aclean` or `-ac`: Clean-up All Cache.
+* `--installclean` or `-ic`: Install clean mode. Clean installed module.
 * `--shutdown` or `-s`: Shutdown system after build complete.
 
 ## Credits

@@ -42,6 +42,19 @@ get_arguments () {
 				fi
 			fi
 		fi
+		if [ "$arg" == "--installclean" ] || [ "$arg" == "-ic" ];
+	    then
+	        if [ "$ARG_INSTALLCLEAN_SUPPORTED" = true ];
+	        then
+		        if [ -z $INSTALLCLEAN ];
+		        then
+					echo "Install clean build mode enabled."
+					INSTALLCLEAN=true
+				else
+					echo "Install clean build mode set to $INSTALLCLEAN by options.txt"
+				fi
+			fi
+		fi
 		if [ "$arg" == "--clean" ] || [ "$arg" == "-c" ];
 	    then
 	        if [ "$ARG_CLEAN_SUPPORTED" = true ];
@@ -299,7 +312,10 @@ set_global_thinlto () {
 }
 
 clean_build () {
-	if [ "$CLEAN" = true ];
+	if [ "$INSTALLCLEAN" = true ];
+	then
+		m installclean
+	elif [ "$CLEAN" = true ];
 	then
 		rm -Rf $ROMBASE/out
 		m clean
