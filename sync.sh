@@ -17,7 +17,7 @@ get_arguments "$@"
 # Reset back to current directory
 cd $CWD
 
-update_apt
+update_pkg
 
 check_clean_sync
 
