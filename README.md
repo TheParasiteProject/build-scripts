@@ -1,7 +1,7 @@
 # Build-Scripts
 
 Sync, build script for (Insert project name here) project.<br>
-Only supports Ubuntu 23.04 and up.<br>
+Only supports Ubuntu 23.04 and up, Debian, Arch Linux.<br>
 These are not fancy scripts. Just for personal use :P
 
 ## Desc
