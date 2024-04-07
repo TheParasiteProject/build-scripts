@@ -20,7 +20,7 @@ BUILD_PROC=${nproc}
 #GTLTO=true ## Zip file error ##
 
 ## Build
-DEVICE=sweet
+DEVICE=pdx234
 BUILDTYPE=user
 BUILD_TARGET="bacon"
 OUT_FILE="$ROMNAME*$DEVICE*.zip"
