@@ -16,11 +16,13 @@ These are not fancy scripts. Just for personal use :P
 * Automatically install all dependancies.
 * If there're any manifests files found under `.configs/additional-manifests` dir,<br>
   those files will be copied under `.repo/local_manifests`.
-* If there're any manifests files found under `.configs/device-manifests` dir,<br>
-  those files will be copied under `.repo/local_manifests`.
+* If there're any manifests files found under `.configs/device-manifests`: dir,<br>
+  those files will be copied under `.repo/local_manifests`.<br>
   Make sure `device-manifests` and `additional-manifests` have not same file name or contents.
 * If there're no vars set, will use default values.
 * If source dir already exists, it will update repos.
+
+You can find example device-manifests from [our Project's devices repo](https://github.com/TheParasiteProject-Devices/device-manifests).
 
 ### Vars
 
