@@ -137,8 +137,11 @@ update_pkg () {
 			git clone https://aur.archlinux.org/yay.git /tmp/yay
 			makepkg -si /tmp/yay --noconfirm
 		fi
-		sudo pacman -Sy aria2 autoconf automake axel base-devel bc bison ccache clang cmake coreutils curl expat flex gcc-multilib git git-lfs github-cli glibc gmp gnupg go gperf htop imagemagick inetutils java-environment lib32-ncurses lib32-readline lib32-zlib libmpc libtool libxcrypt-compat libxml2 libxslt lz4 lzip lzop maven mpfr mtd-utils nano ncftp ncurses openssl patch patchelf perl-switch perl-xml-libxml-simple pkgconf pngcrush pngquant python3 qemu-user-static-binfmt re2c readline rsync schedtool squashfs-tools subversion texinfo unzip vim w3m wget wxwidgets-gtk3 xmlstarlet xz zip zlib --needed --noconfirm
-		yay -Sy lib32-ncurses5-compat-libs ncurses5-compat-libs sdl android-devel --needed --noconfirm
+		sudo pacman -Sy aria2 autoconf automake axel base-devel bc bison ccache clang cmake coreutils curl expat flex gcc-multilib git git-lfs github-cli glibc gmp gnupg go gperf htop imagemagick inetutils java-environment lib32-ncurses lib32-readline lib32-zlib libmpc libtool libxcrypt-compat libxml2 libxslt lz4 lzip lzop maven mpfr mtd-utils nano ncftp ncurses openssl patch patchelf perl-switch perl-xml-libxml-simple pkgconf pngcrush pngquant python3 qemu-user-static-binfmt re2c readline rsync schedtool squashfs-tools subversion texinfo unzip vim w3m wget wxwidgets-gtk3 xmlstarlet xz zip zlib gcc-multilib gcc-libs-multilib libtool-multilib lib32-libusb lib32-glibc bash-completion --needed --noconfirm
+		yay -Sy lib32-ncurses5-compat-libs ncurses5-compat-libs sdl android-devel lib32-libusb-compat android-sdk android-sdk-platform-tools android-udev repo termcap --needed --noconfirm
+		sudo mkdir -p /opt/bin
+		rm -Rf /opt/bin/python
+		sudo ln -sf /usr/bin/python3 /opt/bin/python
 	elif [ -f "/etc/debian_version" ]; then
 		sudo apt update
 		sudo apt install '^liblz4-.*' '^liblzma.*' '^lzma.*' adb apt-utils aria2 autoconf automake axel bc binfmt-support bison build-essential ccache clang cmake curl expat fastboot flex g++ g++-multilib gawk gcc gcc-multilib gh git git-lfs gnupg golang gperf htop imagemagick lib32ncurses-dev lib32ncurses5-dev lib32readline-dev lib32z1-dev libc6-dev libcap-dev libexpat1-dev libgmp-dev liblz4-tool libmpc-dev libmpfr-dev libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libswitch-perl libtinfo5 libtool libwxgtk3.2-dev libxml-simple-perl libxml2 libxml2-utils lsb-base lzip lzop maven mtd-utils mtp-tools ncftp ncurses-dev patch patchelf pkg-config pngcrush pngquant python-is-python3 python3 python3-all-dev python3-full python3-venv re2c rsync schedtool software-properties-common squashfs-tools subversion texinfo unzip w3m wget xmlstarlet xsltproc zip zlib1g-dev -y
@@ -194,6 +197,12 @@ set_profile () {
 				echo "fi" >> $profile
 			fi
 		done
+		if ! grep -q "PATH=\"/opt/bin:\$PATH\"" $profile ; 
+		then
+			echo "if [ -d \"/opt/bin/\" ] ; then" >> $profile
+			echo "    PATH=\"/opt/bin/:\$PATH\"" >> $profile
+			echo "fi" >> $profile
+		fi
 		source $profile
 	fi
 	profile=
