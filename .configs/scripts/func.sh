@@ -140,7 +140,7 @@ update_pkg () {
 		sudo pacman -Sy aria2 autoconf automake axel base-devel bc bison ccache clang cmake coreutils curl expat flex gcc-multilib git git-lfs github-cli glibc gmp gnupg go gperf htop imagemagick inetutils java-environment lib32-ncurses lib32-readline lib32-zlib libmpc libtool libxcrypt-compat libxml2 libxslt lz4 lzip lzop maven mpfr mtd-utils nano ncftp ncurses openssl patch patchelf perl-switch perl-xml-libxml-simple pkgconf pngcrush pngquant python3 qemu-user-static-binfmt re2c readline rsync schedtool squashfs-tools subversion texinfo unzip vim w3m wget wxwidgets-gtk3 xmlstarlet xz zip zlib gcc-multilib gcc-libs-multilib libtool-multilib lib32-libusb lib32-glibc bash-completion --needed --noconfirm
 		yay -Sy lib32-ncurses5-compat-libs ncurses5-compat-libs sdl android-devel lib32-libusb-compat android-sdk android-sdk-platform-tools android-udev repo termcap --needed --noconfirm
 		sudo mkdir -p /opt/bin
-		rm -Rf /opt/bin/python
+		sudo rm -Rf /opt/bin/python
 		sudo ln -sf /usr/bin/python3 /opt/bin/python
 	elif [ -f "/etc/debian_version" ]; then
 		sudo apt update
