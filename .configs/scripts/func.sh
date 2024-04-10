@@ -130,7 +130,7 @@ init_git_account () {
 update_pkg () {
 	# prompt for root and install necessary packages
 	if [ -f "/etc/arch-release" ]; then
-		if ! yay -v > /dev/null 2>&1; then
+		if ! yay -h > /dev/null 2>&1; then
  			echo "yay command not installed! Start building..."
 			sudo pacman -Sy
 			sudo pacman -S --needed base-devel git
