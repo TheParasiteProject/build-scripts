@@ -364,7 +364,6 @@ copy_built_files() {
 }
 
 build_and_copy () {
-	lunch "$LUNCHCOMMAND"
 	if [ ! -z "$BUILD_TARGET" ];
 	then
 		m -j"$BUILD_PROC" "$BUILD_TARGET"

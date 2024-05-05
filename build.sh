@@ -48,6 +48,9 @@ set_thinlto_cache
 # Global ThinLTO
 set_global_thinlto
 
+# Lunch device
+lunch "$LUNCHCOMMAND"
+
 # Clean Build
 clean_build
 
