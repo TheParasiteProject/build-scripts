@@ -337,7 +337,6 @@ clean_build () {
 		m installclean
 	elif [ "$CLEAN" = true ];
 	then
-		rm -Rf $ROMBASE/out
 		m clean
 	fi
 }
