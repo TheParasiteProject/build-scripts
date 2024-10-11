@@ -42,6 +42,7 @@ then
 	copy_additional_manifests
 	copy_device_manifests
 
+	repo_update
 	repo_sync
 fi
 
@@ -56,7 +57,8 @@ then
 	
 	copy_additional_manifests
 	copy_device_manifests
-	
+
+	repo_update
 	repo_sync
 	
 	cd $ROMBASE

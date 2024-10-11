@@ -278,6 +278,13 @@ repo_sync () {
 	fi
 }
 
+repo_update () {
+	cd .repo/repo
+	git fetch origin main
+	git pull origin main
+	cd ../../
+}
+
 repo_reset () {
 	repo forall -c 'git reset --hard'
 	repo forall -c 'git clean -fdd'
