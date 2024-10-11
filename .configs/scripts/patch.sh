@@ -1,16 +1,14 @@
 #!/bin/bash
 
 # arguments
-if [ ! -z "$1" ];
-then
+if [ ! -z "$1" ]; then
 	CWD="$1"
 fi
 
 # get working directory
-if [ -z $CWD ];
-then
+if [ -z $CWD ]; then
 	echo "No working directory specified"
- 	exit 1
+	exit 1
 fi
 
 source $CWD/.configs/scripts/script-configs.txt

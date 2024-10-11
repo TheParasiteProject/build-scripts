@@ -29,8 +29,7 @@ update_bin
 init_git_account
 
 # check for $ROMNAME
-if [ ! -d $ROMBASE ]; 
-then
+if [ ! -d $ROMBASE ]; then
 	# create directories
 	mkdir -p $ROMBASE
 
@@ -46,23 +45,22 @@ then
 	repo_sync
 fi
 
-if [ -d $ROMBASE ]; 
-then
+if [ -d $ROMBASE ]; then
 	# Update sync (and sync again failed sync)
 	cd $ROMBASE
-	
+
 	repo_reset
-	
+
 	update_repo_manifest
-	
+
 	copy_additional_manifests
 	copy_device_manifests
 
 	repo_update
 	repo_sync
-	
+
 	cd $ROMBASE
-	
+
 	# Sources envsetup to execute vendorsetup scripts
 	source build/envsetup.sh
 

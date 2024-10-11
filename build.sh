@@ -21,8 +21,7 @@ source $FUNCS_CUSTOM
 # arguments
 get_arguments "$@"
 
-if [ ! -d $ROMBASE ];
-then
+if [ ! -d $ROMBASE ]; then
 	echo "There's no $ROMBASE directory found! Sync it first!"
 	exit 1
 fi
