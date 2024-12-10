@@ -6,9 +6,9 @@ These are not fancy scripts. Just for personal use :P
 
 ## Desc
 
-* Edit options.txt to match your own needs.
-* Although there's args exist, you can hardcoded those options on `options.txt`<br>
-  (e.g. Setting `VERBOSE=true` on `options.txt` will have same effect with arg `-v`)
+* Edit `options.sh` to match your own needs.
+* Although there's args exist, you can hardcoded those options on `options.sh`<br>
+  (e.g. Setting `VERBOSE=true` on `options.sh` will have same effect with arg `-v`)
 
 ## sync.sh
 

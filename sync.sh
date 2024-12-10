@@ -5,8 +5,8 @@ ARG_CLEANSYNC_SUPPORTED=true
 # get current working directory
 CWD=$(pwd)
 
-source $CWD/.configs/scripts/script-configs.txt
-source $CWD/options.txt
+source $CWD/.configs/scripts/script-configs.sh
+source $CWD/options.sh
 
 source $FUNCS
 source $FUNCS_CUSTOM

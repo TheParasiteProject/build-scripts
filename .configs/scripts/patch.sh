@@ -11,7 +11,7 @@ if [ -z $CWD ]; then
 	exit 1
 fi
 
-source $CWD/.configs/scripts/script-configs.txt
+source $CWD/.configs/scripts/script-configs.sh
 
 source $FUNCS
 source $FUNCS_CUSTOM

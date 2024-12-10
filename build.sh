@@ -9,8 +9,8 @@ ARG_INSTALLCLEAN_SUPPORTED=true
 # get current working directory
 CWD=$(pwd)
 
-source $CWD/.configs/scripts/script-configs.txt
-source $CWD/options.txt
+source $CWD/.configs/scripts/script-configs.sh
+source $CWD/options.sh
 
 # Create output directory to store rom zip, img
 mkdir -p $OUTDIR

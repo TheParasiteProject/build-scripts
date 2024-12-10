@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $CWD/.configs/scripts/script-configs.txt
+source $CWD/.configs/scripts/script-configs.sh
 
 get_arguments() {
 	for arg in "$@"; do
@@ -10,7 +10,7 @@ get_arguments() {
 				VERBOSE=true
 				set -x
 			else
-				echo "Verbose mode set to $VERBOSE by options.txt"
+				echo "Verbose mode set to $VERBOSE by options.sh"
 			fi
 		fi
 		if [ "$arg" == "--ccache" ] || [ "$arg" == "-ec" ]; then
@@ -19,7 +19,7 @@ get_arguments() {
 					echo "Enable CCache."
 					CCACHE=true
 				else
-					echo "CCache mode set to $CCACHE by options.txt"
+					echo "CCache mode set to $CCACHE by options.sh"
 				fi
 			fi
 		fi
@@ -29,7 +29,7 @@ get_arguments() {
 					echo "Enable ThinLTO Cache."
 					TCACHE=true
 				else
-					echo "ThinLTO Cache mode set to $TCACHE by options.txt"
+					echo "ThinLTO Cache mode set to $TCACHE by options.sh"
 				fi
 			fi
 		fi
@@ -39,7 +39,7 @@ get_arguments() {
 					echo "Install clean build mode enabled."
 					INSTALLCLEAN=true
 				else
-					echo "Install clean build mode set to $INSTALLCLEAN by options.txt"
+					echo "Install clean build mode set to $INSTALLCLEAN by options.sh"
 				fi
 			fi
 		fi
@@ -49,7 +49,7 @@ get_arguments() {
 					echo "Clean build mode enabled."
 					CLEAN=true
 				else
-					echo "Clean build mode set to $CLEAN by options.txt"
+					echo "Clean build mode set to $CLEAN by options.sh"
 				fi
 			fi
 		fi
@@ -59,7 +59,7 @@ get_arguments() {
 					echo "Clean sync mode enabled."
 					CLEANSYNC=true
 				else
-					echo "Clean sync mode set to $CLEANSYNC by options.txt"
+					echo "Clean sync mode set to $CLEANSYNC by options.sh"
 				fi
 			fi
 		fi
@@ -69,7 +69,7 @@ get_arguments() {
 					echo "All Cache Clean mode enabled."
 					ACLEAN=true
 				else
-					echo "CCache Clean mode set to $ACLEAN by options.txt"
+					echo "CCache Clean mode set to $ACLEAN by options.sh"
 				fi
 			fi
 		fi
@@ -78,7 +78,7 @@ get_arguments() {
 				echo "Shutdown system after tasks complete."
 				SHUTDOWN=true
 			else
-				echo "Shutdown system after tasks complete mode set to $SHUTDOWN by options.txt"
+				echo "Shutdown system after tasks complete mode set to $SHUTDOWN by options.sh"
 			fi
 		fi
 	done
