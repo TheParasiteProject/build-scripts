@@ -7,10 +7,10 @@ get_arguments() {
 		if [ "$arg" == "--verbose" ] || [ "$arg" == "-v" ]; then
 			if [ -z $VERBOSE ]; then
 				echo "Verbose mode enabled."
-				VERBOSE=true
+				VERBOSE=1
 				set -x
 			else
-				echo "Verbose mode set to $VERBOSE by options.sh"
+				echo "Verbose mode enabled by options.sh"
 			fi
 		fi
 		if [ "$arg" == "--ccache" ] || [ "$arg" == "-ec" ]; then
@@ -316,7 +316,7 @@ copy_built_files() {
 
 build_and_copy() {
 	if [ ! -z "$BUILD_TARGET" ]; then
-		m -j"$BUILD_PROC" "$BUILD_TARGET"
+		m -j"$BUILD_PROC" "$BUILD_TARGET" VERBOSE="$VERBOSE"
 	fi
 	if [ $? != 0 ]; then
 		copy_built_files "$BUILD_OUT" error.log
